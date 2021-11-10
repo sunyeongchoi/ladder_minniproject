@@ -1,10 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 const (
 	row int = 12
-	column int = 5
+	column int = 6
 )
 type Ladder struct {
 	arr [row][column]int
@@ -17,18 +21,13 @@ func (ladder *Ladder) add(a int, b int) {
 }
 
 func (ladder *Ladder) random() {
-	ladder.add(2, 0)
-	ladder.add(4, 0)
-	ladder.add(8, 0)
-	ladder.add(1, 1)
-	ladder.add(6, 1)
-	ladder.add(9, 1)
-	ladder.add(3, 2)
-	ladder.add(5, 2)
-	ladder.add(8, 2)
-	ladder.add(4, 3)
-	ladder.add(7, 3)
-	ladder.add(10, 3)
+	for i:=0; i<row; i++ {
+		rand.Seed(time.Now().Unix())
+		s1 := rand.NewSource(time.Now().UnixNano())
+		a := rand.New(s1).Intn(row-1)
+		b := rand.New(s1).Intn(column-2)
+		ladder.add(a, b)
+	}
 }
 
 func (ladder *Ladder) start(index int) int {
@@ -64,14 +63,14 @@ func main()  {
 	//fmt.Println(result)
 
 	// [방법2] 사다리타기
+	var result []string
+	var member = []string{"김효경", "박재호", "박진휘", "이연지", "엄태준", "최수녕"}
+
 	ladder := &Ladder{}
 	ladder.random()
-	var result []string
-	member := []string{"김효경", "박재호", "박진휘", "이연지", "엄태준", "최수녕"}
-	number := 0
-	for number < column {
-		result = append(result, member[ladder.start(number)])
-		number++
+
+	for i:=0; i < column; i++ {
+		result = append(result, member[ladder.start(i)])
 	}
 	fmt.Println(result)
 }

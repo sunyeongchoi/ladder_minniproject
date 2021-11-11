@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	row int = 12
+	row int = 20
 	column int = 6
 )
 type Ladder struct {
@@ -25,7 +25,8 @@ func (ladder *Ladder) random() {
 		rand.Seed(time.Now().Unix())
 		s1 := rand.NewSource(time.Now().UnixNano())
 		a := rand.New(s1).Intn(row-1)
-		b := rand.New(s1).Intn(column-2)
+		b := rand.New(s1).Intn(column-1)
+		fmt.Println(b)
 		ladder.add(a, b)
 	}
 }
@@ -72,5 +73,5 @@ func main()  {
 	for i:=0; i < column; i++ {
 		result = append(result, member[ladder.start(i)])
 	}
-	fmt.Println(result)
+	fmt.Println(result[:5])
 }

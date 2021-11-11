@@ -26,7 +26,6 @@ func (ladder *Ladder) random() {
 		s1 := rand.NewSource(time.Now().UnixNano())
 		a := rand.New(s1).Intn(row-1)
 		b := rand.New(s1).Intn(column-1)
-		fmt.Println(b)
 		ladder.add(a, b)
 	}
 }
